@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# a morons implementation of traceroute
+
+addr=${1}
+
+for k in {1..99}; do
+  res=$(timeout 3 ping -t ${k} -c 1 ${addr})
+  res=(${res})
+
+  case ${res[@]} in
+  *exceeded*)
+    (( hopcount++ ))
+    printf "Hop: %i, %s\n" ${hopcount} ${res[8]}
+  ;;
+  *icmp_seq*) break    ;;
+  *)          continue ;;
+  esac
+done
