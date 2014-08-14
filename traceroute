@@ -6,7 +6,6 @@ addr=${1}
 for k in {1..99}; do
   res=$(ping -t ${k} -c1 ${addr} -W3)
   res=(${res})
-
   case ${res[@]} in
   *"exceeded"* | *"0 received"*)
     (( hopcount++ ))
