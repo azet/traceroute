@@ -10,7 +10,7 @@ for k in {1..99}; do
   case ${res[@]} in
   *exceeded*)
     (( hopcount++ ))
-    printf "Hop: %i, %s\n" ${hopcount} ${res[8]}
+    printf "Hop %i: %s\n" ${hopcount} ${res[8]}
   ;;
   *icmp_seq*) break    ;;
   *)          continue ;;
