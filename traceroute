@@ -4,13 +4,17 @@
 addr=${1}
 
 for k in {1..99}; do
-  res=$(timeout 3 ping -t ${k} -c 1 ${addr})
+  res=$(ping -t ${k} -c1 ${addr} -W3)
   res=(${res})
 
   case ${res[@]} in
-  *exceeded*)
+  *"exceeded"* | *"0 received"*)
     (( hopcount++ ))
-    printf "Hop %i: %s\n" ${hopcount} ${res[8]}
+    [[ ${res[@]} == *"exceeded"* ]] && {
+      printf "Hop %i:\t%s\n" ${hopcount} ${res[8]}
+      continue
+    }
+    printf "Hop %i:\t???\n" ${hopcount}
   ;;
   *icmp_seq*) break    ;;
   *)          continue ;;
