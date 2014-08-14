@@ -2,7 +2,8 @@
 this repo holds a collection of traceroute implementations.
 
 ### files
-  * `traceroute` - bash implementation using `ping(1)`
+  * `traceroute` - bash implementation using `ping(1)` (do not take this
+    seriously)
 
 ## License
 http://opensource.org/licenses/MIT
